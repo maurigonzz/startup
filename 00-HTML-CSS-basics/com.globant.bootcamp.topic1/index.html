@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Topic</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Este es el header</h1>
+    </header>
+
+    <section>
+        <article id="holaMundoSection" style="visibility: hidden">
+            <h1>Hola Mundo</h1>
+
+
+        </article>
+        <textarea class="alias" id="alias" name="" cols="100" rows="11"></textarea><br>
+
+        <button type="submit" onclick="showSection()">Mostrar</button>
+    </section>
+
+    <aside>
+        <h1>Este es el Aside</h1>
+    </aside>
+
+    <footer>
+        <h1>Este es el Footer</h1>
+    </footer>
+</body>
+
+
+<script>
+
+    function showSection()
+    {
+        var mydiv = document.getElementById("holaMundoSection");
+        //var textArea = document.getElementById("alias");
+        var textArea = document.getElementsByClassName("alias");
+
+        if (mydiv == null)
+        {
+            alert("No existe sección a mostrar");
+        }
+        //div found
+        mydiv.style.visibility="visible";
+        textArea[0].focus();
+    }
+
+    function hideSection()
+    {
+        var mydiv = document.getElementById("holaMundoSection");
+        if (mydiv == null)
+        {
+            alert("No existe sección a mostrar");
+        }
+        //div found
+        mydiv.style.visibility="hidden";
+    }
+
+
+</script>
+
+
+</html>
+
