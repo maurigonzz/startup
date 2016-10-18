@@ -1,0 +1,31 @@
+body{
+    text-align: center;
+    font-family: "Myriad Pro";
+}
+
+header{
+    background-color: aliceblue;
+    width: 100%;
+    float: left;
+}
+
+section{
+    background-color: cornflowerblue;
+    width: 80%;
+    height: 500px;
+    float: left;
+
+}
+
+aside{
+    background-color: gold;
+    width: 20%;
+    height: 500px;
+    float: left;
+}
+
+footer{
+    background-color: olivedrab;
+    float: left;
+    width: 100%;
+}

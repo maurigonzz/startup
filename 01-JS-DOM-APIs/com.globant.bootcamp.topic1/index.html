@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Topic</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Este es el header</h1>
+    </header>
+
+    <section>
+        <article id="holaMundoSection" style="visibility: hidden">
+            <h1>Hola Mundo</h1>
+
+
+        </article>
+        <textarea class="alias" id="alias" name="" cols="100" rows="11"></textarea><br>
+
+        <button type="submit" id="button1" onclick="showSection()">Mostrar</button>
+
+        <p id="p1">AQUÍ SE MOSTRARÁ EL RESULTADO DEL GET RESPONSE.</p>
+
+    </section>
+
+    <aside>
+        <h1>Este es el Aside</h1>
+    </aside>
+
+    <footer>
+        <h1>Este es el Footer</h1>
+    </footer>
+</body>
+
+
+<script>
+
+    //Muestra un compoenente que estaba oculto (en este caso el textArea, se setea la visibilidad).
+    function showSection()
+    {
+        var mydiv = document.getElementById("holaMundoSection");
+        //var textArea = document.getElementById("alias");
+        var textArea = document.getElementsByClassName("alias");
+
+        if (mydiv == null)
+        {
+            alert("No existe sección a mostrar");
+        }
+        //div found
+        mydiv.style.visibility="visible";
+        //Se setea el cursor en el el textArea (Practice 6).
+        textArea[0].focus();
+    }
+
+    //Oculta un compoenente que estaba visible
+    function hideSection()
+    {
+        var mydiv = document.getElementById("holaMundoSection");
+        if (mydiv == null)
+        {
+            alert("No existe sección a mostrar");
+        }
+        //div found
+        mydiv.style.visibility="hidden";
+    }
+
+
+    //Practice 7.
+    //Evento que escucha cuando se hace click. (se le pasa el id del componente, en este caso el id de un botón.)
+    $( "#button1" ).click(function() {
+        //alert( "Handler for .click() called." );
+
+        $.get("https://jsonplaceholder.typicode.com/posts/1", function(data, status){
+            alert("SE ESTABLECIO LA CONEXION CON EL SERVIDOR");
+
+            //Practice 10.
+            var miNombre = "</BR>" + getMiNombre();
+
+            //Se ecribe el resultado del get. Practice 8.
+            document.getElementById("p1").innerHTML = "RESULTADO DEL GET RESPONSE: "+data.title + miNombre;
+            //alert( "Handler for .click() called." );
+
+
+
+
+
+            //Se utiliza cuando falla el llamado del GET. Practice 9.
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("ERROR: No se pudo conectar al servidor: " + textStatus + jqXHR + errorThrown);
+
+            //Se modifica el color del componente p1 y se muestra el error.
+            $("#p1").css('color','red');
+            document.getElementById("p1").innerHTML = textStatus + jqXHR + errorThrown;
+
+        });
+
+    });
+
+    function getMiNombre() {
+
+        return "MI NOMBRE ES: Mauricio González";
+        
+    }
+
+    
+
+
+</script>
+
+</html>
+
