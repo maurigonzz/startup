@@ -1,6 +1,12 @@
 body{
     text-align: center;
     font-family: "Myriad Pro";
+    background-color: cornflowerblue;
+    margin-left: 0%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-right: 0%;
+
 }
 
 header{
@@ -11,18 +17,24 @@ header{
 
 section{
     background-color: cornflowerblue;
-    width: 80%;
-    height: 500px;
+    width: 70%;
+    height: 100%;
     float: left;
+    padding-bottom: 20%;
+
 
 }
 
-aside{
-    background-color: gold;
-    width: 20%;
-    height: 500px;
+
+#aside1{
+    background-color: #4eed14;
+    width: 30%;
+    height: 100%;
     float: left;
+    margin-bottom: 0%;
 }
+
+
 
 footer{
     background-color: olivedrab;

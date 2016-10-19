@@ -21,14 +21,20 @@
         </article>
         <textarea class="alias" id="alias" name="" cols="100" rows="11"></textarea><br>
 
-        <button type="submit" id="button1" onclick="showSection()">Mostrar</button>
+        <button type="submit" id="button1" onclick="showSection()">Servidor</button>
+
+
 
         <p id="p1">AQUÍ SE MOSTRARÁ EL RESULTADO DEL GET RESPONSE.</p>
 
+        <input id="inputSearch" type="text" name="">
+        <button type="submit" id="button2" onclick="showSection()">Spotify</button>
+
     </section>
 
-    <aside>
-        <h1>Este es el Aside</h1>
+    <aside id="aside1">
+        <h1>Spotify:</h1>
+
     </aside>
 
     <footer>
@@ -102,11 +108,58 @@
 
     function getMiNombre() {
 
-        return "MI NOMBRE ES: Mauricio González";
+        return "    MI NOMBRE ES: Mauricio González";
         
     }
 
-    
+
+    //Practice 11 y 12 Spotify
+    $( "#button2" ).click(function() {
+        //alert( "Handler for .click() called." );
+
+        /* Otro tipo de consulta a Spotify (se le pasa la cosulta directo en la url)
+        $.ajax({
+            url: "https://api.spotify.com/v1/search?q=tania%20bowra&type=artist",
+            success: function(response) {
+               //document.getElementById("p1").innerHTML = response.artists.href;
+                //$("#p1").html(result);
+
+            }
+        });
+        */
+
+        $.ajax({
+            url: "https://api.spotify.com/v1/search",
+            data: {
+                q: document.getElementById("inputSearch").value, //"Rolling Stones'"
+                type: 'album'
+            },
+            success: function(response) {
+                //document.getElementById("p1").innerHTML = response.albums.href;
+                //$("#p1").html(result);
+
+                var albums = response.albums.items;
+                var cant = albums.length;
+                var result = "";
+
+                for(var i=0; i<cant; i++){
+                    var album = albums[i];
+                    //result= result + "<li>" + album.name + "</li>";
+                    result += "<IMG SRC='" + album.images[0].url + "' WIDTH=160></br>";
+                    result += "<p>";
+                    result += "NAME: " + album.name + "</br>";
+                    result += "TYPE: " + album.album_type + "</br>";
+                    result += "URL:" + album.href + "</br>";
+                    result += "</p>";
+
+                }
+                document.getElementById("aside1").innerHTML = result;
+
+            }
+        });
+
+
+    });
 
 
 </script>
