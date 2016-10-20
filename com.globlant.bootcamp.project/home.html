@@ -20,9 +20,6 @@
             <ul class="menu">
                 <li><a href="home.html"><i class="icon-home"></i>HOME</a>
                     <ul class="sub-menu">
-                        <li><a href="#">Sub-Menu 1</a></li>
-                        <li><a href="#">Sub-Menu 2</a></li>
-                        <li><a href="#">Sub-Menu 3</a></li>
                     </ul>
                 </li>
                 <li><a  href="#"><i class="icon-user"></i>MOVIES</a>
@@ -56,27 +53,24 @@
 <section id="filtersSection">
     <article id="filters1">
 
-            <ul class="menu">
-                <li><a href="#"><i class="icon-home"></i>TODAS</a></li>
-                <li><a  href="#"><i class="icon-user"></i>POPULARES</a></li>
-                <li><a  href="#"><i class="icon-bullhorn"></i>RECIENTES</a></li>
+            <ul class="menu" >
+                <li><a href="#" id="allButton" ><i class="icon-home"></i>ALL</a></li>
+                <li><a  href="#" id="popularButton"><i class="icon-user"></i>POPULAR</a></li>
+                <li><a  href="#"id="recentButton"><i class="icon-bullhorn"></i>RECENT</a></li>
             </ul>
 
-            <select name="generos" style="margin-left: 16%;">
-                <option value="aventura">Aventura</option>
-                <option value="ciencia Ficcion">Ciencia Ficcion</option>
-                <option value="comedia">Comedia</option>
-                <option value="deporte">Deporte</option>
+            <select id="selectGenres" name="generos" style="margin-left: 16%;">
+
             </select>
     </article>
 
     <article id="filters2">
 
         <ul class="menu">
-            <li> <input id="search" type="text" name=""></li>
+            <li> <input id="inputSearch" type="text" name=""></li>
 
 
-            <input type="submit" id="searchButton" value="Buscar" style="width: 10em">
+            <input type="submit" id="searchButton" value="Search" style="width: 10em">
 
         </ul>
 
@@ -145,51 +139,271 @@
         //var jsonFiles = $.getJSON("files/moviese.json");
         var movies = jQuery.parseJSON(text);
 
+        //Hace una copia del objeto movies original (por si lo necesitamos más adelante).
+        var allMoviesByDefault = JSON.parse(JSON.stringify(movies));
 
 
-        var moviesCant = movies.length;
-        var imagenes = "<tr>";
-        var max = 0;
-        for (i = 0; i < moviesCant; i++) {
-            imagenes += '<td><img src="' + movies[i].poster +'"width="100%"></td>';
-            max = max + 1;
+        //Se inicilaliza el componente html select
+        var genres = getGenres(movies);
+        loadGenresIntoHTML(genres);
+        printMovies(movies);
 
-            if (max == 6){
-                imagenes += '</tr>';
-                imagenes += loadTitle(movies,i-5,i);
-                max = 0;
-            }else{
-                if (moviesCant-1 == i){
+        //printMoviesTEST(movies);
+
+
+        //----- Utilizando para probar las funciones
+        //movies = sortByReleased(movies);
+        //movies = sortByRating(movies);
+        //getMovies(movies);
+
+
+        //searchMovie("Forrest",allMoviesByDefault);
+
+        //-----
+
+
+        //Imprime todas las peliculas.
+        $( "#allButton" ).click(function(){
+            printMovies(allMoviesByDefault);
+
+        });
+
+        //Imprime las peliculas ordenadas por rating.
+        $( "#popularButton" ).click(function(){
+            var popularMovies = sortByRating(movies);
+            printMovies(popularMovies);
+
+        });
+
+        //Imprime las peliculas ordenadas por año.
+        $( "#recentButton" ).click(function(){
+            var recentMovies = sortByReleased(movies);
+            printMovies(recentMovies);
+
+        });
+
+
+        //Búsqueda dado un texto
+        $( "#searchButton" ).click(function(){
+            var text = document.getElementById("inputSearch").value;
+            searchMovie(text,allMoviesByDefault);
+
+        });
+
+        $("#selectGenres").change(function () {
+            var sel = document.getElementById('selectGenres').value;
+            searchMovieByGenre(sel.toString(), movies);
+        });
+
+
+
+
+        //Injecta el html correspondiente a partir de la collecion de movies de entrada.
+        function printMovies1(mov) {
+
+            var moviesCant = mov.length;
+            var imagenes = "<tr>";
+            var max = 0;
+            for (i = 0; i < moviesCant; i++) {
+                imagenes += '<td><img src="' + mov[i].poster + '"width="100%"></td>';
+                max = max + 1;
+
+                if (max == 6) {
                     imagenes += '</tr>';
-                    imagenes += loadTitle(movies,i-3,i);
+                    imagenes += loadTitle(mov, i - 5, i);
+                    max = 0;
+                } else {
+                    if (moviesCant - 1 == i) {
+                        imagenes += '</tr>';
+                        imagenes += loadTitle(mov, i - 3, i);
+                    }
+
                 }
 
+
             }
-
-
-
+            imagenes += "</tr>";
+            document.getElementById("tableMovies").innerHTML = imagenes;
         }
-        imagenes += "</tr>";
 
-
-
+        //Injecta el html correspondiente con los datos de la película (con Title, Year, Rating).
         function loadTitle(mov, ini, end)
         {
             //var cant = mov.length - pos+1;
             var result = "<tr>";
 
             for (x = ini; x <= end; x++) {
-                result += '<td><p style="width: 100%; display: inline-block;">'+ mov[x].title + '</p></td>';
+                result += '<td><p style="width: 100%; display: inline-block;">'+ mov[x].title + '</br>'+ mov[x].year + '</br>Rating: '+ mov[x].rating + '</br>'+ mov[x].genre +'</p></td>';
             }
             result += '</tr>';
 
             return result;
         }
 
-        document.getElementById("tableMovies").innerHTML = imagenes;
+        //TEST--------------OK (FUNCIONA)
+        function printMovies(mov) {
+
+            var moviesCant = mov.length;
+            var imagenes = "<tr>";
+            var max = 0;
+            for (i = 0; i < moviesCant; i++) {
+
+                var texto = '</br><p style="width: 100%; display: inline-block;">' + mov[i].title + '</br>'+ mov[i].year + '</br>Rating: '+ mov[i].rating + '</br>'+ mov[i].genre +'</p>';
+
+                imagenes += '<td><img src="' + mov[i].poster + '"width="100%">'+ texto+'</td>';
+                max = max + 1;
+
+                if (max == 6) {
+                    imagenes += '</tr><tr>';
+                    max = 0;
+                }
+
+
+            }
+            imagenes += "</tr>";
+            document.getElementById("tableMovies").innerHTML = imagenes;
+        }
 
 
 
+
+        //Injecta en el componente SELECT de HTML, los distintos generos existentes de las películas
+        function loadGenresIntoHTML(genres) {
+            var sel = document.getElementById('selectGenres');
+            for(var i = 0; i < genres.length; i++) {
+                var opt = document.createElement('option');
+                opt.innerHTML = genres[i];
+                opt.value = genres[i];
+                sel.appendChild(opt);
+            }
+        }
+
+
+
+        //Ordena las películas for fecha de lanzamiento.
+        function sortByReleased(mov) {
+            mov.sort(function(a, b) {
+                if (a.released < b.released) { return 1; }
+                if (a.released > b.released) { return -1; }
+                return 0;
+            });
+
+            return mov;
+        }
+
+        //Ordena las películas por Rating.
+        function sortByRating(mov) {
+            mov.sort(function(a, b) {
+                if (a.rating < b.rating) { return 1; }
+                if (a.rating > b.rating) { return -1; }
+                return 0;
+            });
+
+            return mov;
+        }
+
+
+
+
+
+        //Retorna un array con los distintos generos que hay, elimina los duplicados.
+        function getGenres(mov) {
+            var moviesCant = mov.length;
+            var genres = [];
+
+            //Se obtienen todos los generos (cada pilicula puede tener varios generos separados por ",")
+            for (i = 0; i < moviesCant; i++) {
+                var result = mov[i].genre.split(',');
+
+                //Se eliminan los espacios en blanco
+                var cant = result.length;
+                for (x = 0; x < cant; x++) {
+                    genres.push(result[x].trim());
+                }
+            }
+
+            //Se eliminan los repetidos.
+            var uniqueGenres = genres.reduce(function(a,b){
+                if (a.indexOf(b) < 0 ) a.push(b);
+                return a;
+            },[]);
+
+            //---Prueba
+            //for (a = 0; a < uniqueGenres.length; a++) {
+            //    console.log(uniqueGenres[a]);
+            //}
+            //----
+
+
+            return uniqueGenres;
+        }
+
+
+        function searchMovie(str, mov){
+            var result = [];
+            var moviesCant = mov.length;
+
+            console.log(mov);
+
+            for (i = 0; i < moviesCant; i++) {
+
+                //verifica si contiene el substring. //POR AHORA ES CASE SENSITIVE.
+                if(JSON.stringify(mov[i]).indexOf(str) > 0){
+                    //result.append(mov[i]);
+                    console.log(mov[i]);
+                    result.push(JSON.parse(JSON.stringify(mov[i])));
+                    //result.push(JSON.stringify(mov[i]));
+                }
+            }
+            console.log(result);
+            printMovies(result);
+
+            //return result;
+        }
+
+
+        function searchMovieByGenre1(gen, mov){
+            var result = [];
+            var moviesCant = mov.length;
+
+            for (i = 0; i < moviesCant; i++) {
+
+                //verifica si contiene el substring. //POR AHORA ES CASE SENSITIVE.
+                if(JSON.stringify(mov[i].genre).indexOf(gen) > -1){
+                    result.push(JSON.parse(JSON.stringify(mov[i])));
+                    //result.push(JSON.stringify(mov[i]));
+                }
+            }
+            printMovies(result);
+            //printMoviesTEST(result);
+
+        }
+
+        //TEST OK FUNCIONA
+        function searchMovieByGenre(gen, mov){
+            var result = [];
+            var moviesCant = mov.length;
+            for (i = 0; i < moviesCant; i++) {
+
+
+                //console.log(mov[i].genre.toString());
+                var a = mov[i].genre.toString();
+
+                //verifica si contiene el substring. //POR AHORA ES CASE SENSITIVE.
+                if(a.indexOf(gen.toString()) > -1){
+                    result.push(JSON.parse(JSON.stringify(mov[i])));
+                    //result.push(JSON.stringify(mov[i]));
+                    //console.log(mov[i]);
+
+                    console.log(gen);
+                }
+            }
+            printMovies(result);
+            //printMoviesTEST(result);
+            console.log(result);
+            console.log(result.length);
+        }
+    
     </script>
 
 
