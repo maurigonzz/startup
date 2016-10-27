@@ -1,0 +1,168 @@
+<section id="menu">
+    <nav id="menu_gral">
+        <ul class="menu">
+            <li><a href="index.html"><i class="icon-home"></i>HOME</a>
+                <ul class="sub-menu">
+                </ul>
+            </li>
+            <li><a  href="movies.html"><i class="icon-user"></i>MOVIES</a>
+                <ul class="sub-menu">
+                    <li><a href="#myModalNorm" data-toggle="modal" data-target="#myModalNorm">New</a></li>
+                    <li><a href="movies.html">Search</a></li>
+                </ul>
+            </li>
+            <li><a  href="#"><i class="icon-camera"></i>HELP</a></li>
+            <li><a  href="#"><i class="icon-bullhorn"></i>ABOUT US</a></li>
+            <li><a  href="#"><i class="icon-envelope-alt"></i>CONTACT</a></li>
+        </ul>
+    </nav>
+
+</section>
+
+
+
+<section id="modalSection">
+
+
+    <!-- Button trigger modal -->
+    <!--
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm">
+        Launch Normal Form
+    </button>
+    -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        New Movie
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+
+
+                    <form id="modalForm" onSubmit="JavaScript:createMovie(); return false;">
+                        <div>
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" name="movie_title" placeholder="Enter title" maxlength="80" required/>
+                        </div>
+
+
+                        <div>
+                            <label for="genre">Genre:</label>
+                            <select id="genre" name="movie_genre"></select>
+                        </div>
+
+                        <div>
+                            <label for="poster">Poster:</label>
+                            <input type="url" id="poster" name="movie_poster" placeholder="Enter url"required/>
+                        </div>
+
+                        <div>
+                            <label for="director">Director:</label>
+                            <input type="text" id="director" name="movie_director" placeholder="Enter director"required/>
+                        </div>
+
+                        <div>
+                            <label for="released">Released:</label>
+                            <input type="date" id="released" name="movie_released" />
+                        </div>
+
+                        <div>
+                            <label for="rating">Rating:</label>
+                            <select disabled id="rating" name="movie_rating"></select>
+                        </div>
+
+                        <div>
+                            <label for="actors">Actors:</label>
+                            <input type="text" id="actors" name="movie_actors" placeholder="Enter actors"required/>
+                        </div>
+
+
+                        <div>
+                            <label for="plot">Plot:</label></br>
+                            <textarea id="plot" name="movie_plot" placeholder="Enter plot" maxlength="250"></textarea>
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" id="closeModalButton" class="btn btn-default"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" id="" class="btn btn-primary">
+                                Create Movie
+                            </button>
+                        </div>
+
+
+
+                    </form>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="footerSection">
+    <div class="footer-left">
+
+        <p class="footer-links">
+            <a href="#">Home</a>
+            ·
+            <a href="#">Movies</a>
+            ·
+            <a href="#">Help</a>
+            ·
+            <a href="#">About Us</a>
+            ·
+            <a href="#">Contact</a>
+        </p>
+
+        <p class="footer-company-name">GLBMovies &copy; 2016</p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p>Contact Us</p>
+
+        <form action="#" method="post">
+
+            <input type="text" name="email" placeholder="Email" />
+            <textarea name="message" placeholder="Message"></textarea>
+            <button>Send</button>
+
+        </form>
+
+    </div>
+</section>

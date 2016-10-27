@@ -1,0 +1,36 @@
+html body{
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    background-color: #33383b;
+}
+
+header{
+    background-color: #292c2f;
+}
+
+
+
+
+
+.filterOptions{display:block;}
+
+.filterOptions li{display: inline-block;
+    z-index:100;}
+
+.filterOptions li a {font-weight:600;
+    text-decoration:none;
+    padding:11px;
+    display:block;
+    color:#ffffff;
+
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    -ms-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.filterOptions li a:hover, .filterOptions li:hover > a{color:#ffffff;
+    background:#5383d3;}
