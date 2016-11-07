@@ -1,0 +1,62 @@
+html, body{
+    height: 100%;
+    font-family: "Myriad Pro";
+}
+
+#movieDataSheetSection{
+    width: 100%;
+    margin-top: 3.5%;
+
+}
+
+#posterSection{
+    height: 100%;
+    width: 30%;
+    margin-left: 1%;
+    float: left;
+    display: inline-block;
+}
+
+
+
+
+#descriptionSection{
+    height: 100%;
+    width: 60%;
+    float: left;
+    margin-left: 2%;
+    display: inline-block;
+    color: white;
+}
+
+
+#iframeTrailer{
+    float: left;
+}
+#prevNext{
+    float: left;
+}
+
+
+.next li{display: inline-block;
+    position: relative;
+    z-index:100;
+
+}
+
+.next li a {font-weight:600;
+    text-decoration:none;
+    padding:11px;
+    display:block;
+    color:#ffffff;
+    border: dashed;
+
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    -ms-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.next li a:hover, .menu li:hover > a{color:#ffffff;
+    background:#5383d3;}

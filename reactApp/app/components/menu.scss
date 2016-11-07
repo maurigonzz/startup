@@ -1,0 +1,65 @@
+header{
+    background-color: #292c2f;
+}
+
+.menu{display:block;}
+
+.menu li{display: inline-block;
+    position: relative;
+    z-index:100;}
+
+.menu li a {font-weight:600;
+    text-decoration:none;
+    padding:11px;
+    display:block;
+    color:#ffffff;
+
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    -ms-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.menu li a:hover, .menu li:hover > a{color:#ffffff;
+    background:#5383d3;}
+
+/* hide the second level menu */
+.menu ul {display: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    position: absolute;
+    top: 43px;
+    left: 0px;
+    background: #ffffff;
+}
+
+/* display second level menu on hover */
+.menu li:hover > ul{ display: block;}
+
+.menu ul li {display:block;
+    float: none;
+    background:none;
+    margin:0;
+    padding:0;
+}
+
+.menu ul li a {font-size:12px;
+    font-weight:normal;
+    display:block;
+    color: white;
+    border-left:3px solid #ffffff;
+    background: #5383d3;}
+
+.menu ul li a:hover, .menu ul li:hover > a{
+    font-family: "Myriad Pro";
+    background:#f0f0f0;
+    border-left:3px solid #5383d3;
+    color:#797979;
+}
+
+/* change level 3 menu positions */
+.menu ul ul {left: 149px;
+    top: 0px;
+}
