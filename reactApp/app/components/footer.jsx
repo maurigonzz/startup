@@ -42,7 +42,7 @@ class Footer extends React.Component {
 
                             <p>Contact Us</p>
 
-                            <form action="#" method="post">
+                            <form action="#" method="get">
 
                                 <input type="text" name="email" placeholder="Email" />
                                 <textarea name="message" placeholder="Message"></textarea>

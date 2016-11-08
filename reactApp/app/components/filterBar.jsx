@@ -51,6 +51,11 @@ export default class FilterBar extends Component {
         this.props.changeGenre('Genre',genre);
     }
 
+    handleInputChange(e) {
+        //alert(e.target.value);
+        var text = e.target.value;
+        this.props.changeInputSearch('Text',text);
+    }
 
     render(){
         return(
@@ -61,7 +66,7 @@ export default class FilterBar extends Component {
                         <li><a  href="#" id="popularButton" onClick={this.handlePopularMovies.bind(this)}><i className="icon-user"></i>POPULAR</a></li>
                         <li><a  href="#"id="recentButton" onClick={this.handleReleasedMovies.bind(this)}><i className="icon-bullhorn"></i>RECENT</a></li>
                         <li><Genres genres={this.state.genres} selectedGenre={this.handleGenreChange.bind(this)}/></li>
-                        <li><input id="inputSearch" type="text" name=""/></li>
+                        <li><input id="inputSearch" onChange={this.handleInputChange.bind(this)}/></li>
                     </ul>
                  </section>
             </div>

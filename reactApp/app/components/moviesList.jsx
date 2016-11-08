@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-
+import { Link} from 'react-router';
 import './galleryImage.scss';
 
 export default class MovieList extends Component {
     constructor(props) {
         super(props);
         this.state = { movies: [], filter: ''}
-
         this.getMovies(this.props.filtro, this.props.genre);
     }
 
@@ -14,13 +13,13 @@ export default class MovieList extends Component {
 
     componentWillReceiveProps(nextProps) {
         // You don't have to do this check first, but it can help prevent an unneeded render
-        if ((nextProps.filtro !== this.props.filtro) || (nextProps.genre !== this.props.genre)) {
-            this.getMovies(nextProps.filtro, nextProps.genre);
+        if ((nextProps.filtro !== this.props.filtro) || (nextProps.genre !== this.props.genre) || (nextProps.text !== this.props.text)) {
+            this.getMovies(nextProps.filtro, nextProps.genre, nextProps.text);
         }
     }
 
 
-    getMovies(fil, gen){
+    getMovies(fil, gen, text){
         switch(fil) {
             case "All":
                 this.loadAllMovies();
@@ -33,6 +32,9 @@ export default class MovieList extends Component {
                 break;
             case "Genre":
                 this.loadMoviesByGenre(gen);
+                break;
+            case "Text":
+                this.loadMoviesByText(text);
                 break;
 
         }
@@ -84,6 +86,14 @@ export default class MovieList extends Component {
         this.loadMovies(url);
     }
 
+    loadMoviesByText(text){
+        var url = 'http://localhost:8000/api/movies?search=' + text;
+        //if (gen == 'All'){
+          //  url = 'http://localhost:8000/api/movies';
+        //}
+        this.loadMovies(url);
+    }
+
 
 
 
@@ -100,8 +110,9 @@ export default class MovieList extends Component {
                         return (
                             <div key={m.id} className="responsive">
                                 <div  key={m.id} className="img">
-                                     <img key={m.id} src={m.poster}/>
-
+                                    <Link to={"moviePage/"+ m.id}>
+                                        <img key={m.id} src={m.poster}/>
+                                    </Link>
                                     <div className="desc">
                                         {m.title} <br/> {m.year} <br/> Rating: {m.rating} <br/> {m.genre}
                                     </div>

@@ -9,8 +9,8 @@ export default class MoviePage extends Component {
     }
 
     componentWillMount() {
-        var url = 'http://localhost:8000/api/movies/' + this.props.id;
-        console.log(this.props.id);
+        var id = this.props.params.id;
+        var url = 'http://localhost:8000/api/movies/' + id;
         fetch(url)
             .then((response) => {
                 return response.json()

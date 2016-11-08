@@ -1,29 +1,27 @@
 import React from 'react';
+import { Link} from 'react-router';
 import './menu.scss';
-
 
 class Menu extends React.Component {
     render() {
         return (
-
             <div>
+                {this.props.children}
                 <header id="header">
                     <section id="menu">
                         <nav id="menu_gral">
                             <ul className="menu">
-                                <li><a href="index.html"><i className="icon-home"></i>HOME</a>
+                                <li><Link to="moviePage">HOMES</Link></li>
+                                <li><Link to="moviesPage">MOVIES</Link>
                                     <ul className="sub-menu">
+                                        <li><Link to="">New</Link></li>
+                                        <li><Link to="moviesPage">Search</Link></li>
                                     </ul>
                                 </li>
-                                <li><a  href="movies.html"><i className="icon-user"></i>MOVIES</a>
-                                    <ul className="sub-menu">
-                                        <li><a href="#myModalNorm" data-toggle="modal" data-target="#myModalNorm">New</a></li>
-                                        <li><a href="movies.html">Search</a></li>
-                                    </ul>
-                                </li>
-                                <li><a  href="#"><i className="icon-camera"></i>HELP</a></li>
-                                <li><a  href="#"><i className="icon-bullhorn"></i>ABOUT US</a></li>
-                                <li><a  href="#"><i className="icon-envelope-alt"></i>CONTACT</a></li>
+
+                                <li><Link to="" >HELP</Link></li>
+                                <li><Link to="" >ABOUT</Link></li>
+                                <li><Link to="" >CONTACT</Link></li>
                             </ul>
                         </nav>
 
