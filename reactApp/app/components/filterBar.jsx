@@ -5,8 +5,6 @@ export default class FilterBar extends Component {
     constructor(props) {
         super(props);
         this.state = { genres: [], filter: ''}
-
-        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -22,7 +20,7 @@ export default class FilterBar extends Component {
             })
             .then((gen) => {
                 this.setState({ genres: gen })
-                console.log(gen);
+
 
             }).catch((error) => {
             console.error(error);
@@ -31,14 +29,11 @@ export default class FilterBar extends Component {
 
 
     handleAllMovies(e) {
-        //alert('All');
         this.props.changeFilter('All');
-        //alert('All');
     }
 
     handlePopularMovies(e) {
         this.props.changeFilter('Popular');
-        //alert('Popular');
     }
 
     handleReleasedMovies(e) {
@@ -46,13 +41,11 @@ export default class FilterBar extends Component {
     }
 
     handleGenreChange(e) {
-        //alert(e.target.value);
         var genre = e.target.value;
         this.props.changeGenre('Genre',genre);
     }
 
     handleInputChange(e) {
-        //alert(e.target.value);
         var text = e.target.value;
         this.props.changeInputSearch('Text',text);
     }
@@ -74,7 +67,7 @@ export default class FilterBar extends Component {
     }
 }
 
-
+//Component represent a select componenent of Genres.
 class Genres extends Component {
     constructor(props) {
         super(props);

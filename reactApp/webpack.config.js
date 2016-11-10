@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './app/components/moviesPage.jsx',
+  entry: './app/components/main.jsx',
   output: {
     path: './public/',
     filename: "build.js",

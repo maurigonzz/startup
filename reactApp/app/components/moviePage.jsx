@@ -17,8 +17,7 @@ export default class MoviePage extends Component {
             })
             .then((mov) => {
 
-                this.setState({ movie: mov })
-                console.log(mov);
+                this.setState({ movie: mov });
 
             }).catch((error) => {
             console.error(error);

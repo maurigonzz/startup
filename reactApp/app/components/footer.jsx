@@ -29,10 +29,10 @@ class Footer extends React.Component {
 
                             <div className="footer-icons">
 
-                                <a href="#"><i className="fa fa-facebook"></i></a>
-                                <a href="#"><i className="fa fa-twitter"></i></a>
-                                <a href="#"><i className="fa fa-linkedin"></i></a>
-                                <a href="#"><i className="fa fa-github"></i></a>
+                                <a href="#"><i className="fa fa-facebook">f</i></a>
+                                <a href="#"><i className="fa fa-twitter">T</i></a>
+                                <a href="#"><i className="fa fa-linkedin">l</i></a>
+                                <a href="#"><i className="fa fa-github">G</i></a>
 
                             </div>
 

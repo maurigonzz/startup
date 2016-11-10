@@ -6,29 +6,28 @@ export default class MovieList extends Component {
     constructor(props) {
         super(props);
         this.state = { movies: [], filter: ''}
-        this.getMovies(this.props.filtro, this.props.genre);
+        this.getMovies(this.props.filtro, this.props.genre, this.props.text, this.props.limit);
     }
 
 
 
     componentWillReceiveProps(nextProps) {
-        // You don't have to do this check first, but it can help prevent an unneeded render
         if ((nextProps.filtro !== this.props.filtro) || (nextProps.genre !== this.props.genre) || (nextProps.text !== this.props.text)) {
-            this.getMovies(nextProps.filtro, nextProps.genre, nextProps.text);
+            this.getMovies(nextProps.filtro, nextProps.genre, nextProps.text, nextProps.limit);
         }
     }
 
 
-    getMovies(fil, gen, text){
+    getMovies(fil, gen, text, lim){
         switch(fil) {
             case "All":
                 this.loadAllMovies();
                 break;
             case "Popular":
-                this.loadBestRated();
+                this.loadBestRated(lim);
                 break;
             case "Released":
-                this.loadLastReleased();
+                this.loadLastReleased(lim);
                 break;
             case "Genre":
                 this.loadMoviesByGenre(gen);
@@ -57,24 +56,25 @@ export default class MovieList extends Component {
     }
 
 
-    /* Para concatenar filtros
-    generateUrl(fil,gen){
-
-    }
-    */
 
     loadAllMovies(){
-        var url = 'http://localhost:8000/api/movies';
+        var url = 'http://localhost:8000/api/movies?order=id';
         this.loadMovies(url);
     }
 
-    loadBestRated(){
+    loadBestRated(lim){
         var url = 'http://localhost:8000/api/movies?order=rating';
+        if(lim > 0){
+            url += '&limit='+lim;
+        }
         this.loadMovies(url);
     }
 
-    loadLastReleased(){
+    loadLastReleased(lim){
         var url = 'http://localhost:8000/api/movies?order=released';
+        if(lim > 0){
+            url += '&limit='+lim;
+        }
         this.loadMovies(url);
     }
 
@@ -88,25 +88,17 @@ export default class MovieList extends Component {
 
     loadMoviesByText(text){
         var url = 'http://localhost:8000/api/movies?search=' + text;
-        //if (gen == 'All'){
-          //  url = 'http://localhost:8000/api/movies';
-        //}
         this.loadMovies(url);
     }
-
-
-
 
 
 
     render() {
         return (
             <div>
-                {console.log(this.state.movies)}
                 {
                     this.state.movies.map(function(m){
                         var text = m.title + m.year;
-                       // mov[i].title + '</br>'+ mov[i].year + '</br>Rating: '+ mov[i].rating + '</br>'+ mov[i].genre
                         return (
                             <div key={m.id} className="responsive">
                                 <div  key={m.id} className="img">
